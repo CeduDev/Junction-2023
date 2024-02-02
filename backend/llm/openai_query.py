@@ -42,7 +42,7 @@ async def openai_query(user_query, dataset_path):
     sources = await vector_search(user_query, dataset_path)
     info = await create_info(sources)
 
-    llm = OpenAI(openai_api_key=key)
+    llm = OpenAI(openai_api_key=key, model="gpt-3.5-turbo-instruct")
     llm_chain = LLMChain(prompt=prompt, llm=llm)
     openai_res = llm_chain.run(question=user_query, context=info)
 
